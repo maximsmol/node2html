@@ -136,3 +136,66 @@ describe('Testing attributes', function attr()
 		});
 	});
 });
+
+describe('Selector parsing test', function selectors()
+{
+	describe('Inserting classes', function classes()
+	{
+		it('Should output classes', function test()
+		{
+			var page = {'html.test': {}};
+			assert.equal(
+				node2html.sync(page),
+				'<!DOCTYPE html><html class=\'test\'></html>'
+			);
+		});
+	});
+
+	describe('Not inserting classes', function classes()
+	{
+		it('Should not output classes', function test()
+		{
+			var page = {'html': {}};
+			assert.equal(
+				node2html.sync(page),
+				'<!DOCTYPE html><html></html>'
+			);
+		});
+	});
+
+	describe('Inserting id', function classes()
+	{
+		it('Should output classes', function test()
+		{
+			var page = {'html#test': {}};
+			assert.equal(
+				node2html.sync(page),
+				'<!DOCTYPE html><html id=\'test\'></html>'
+			);
+		});
+	});
+
+	describe('Not inserting id', function classes()
+	{
+		it('Should not output classes', function test()
+		{
+			var page = {'html': {}};
+			assert.equal(
+				node2html.sync(page),
+				'<!DOCTYPE html><html></html>'
+			);
+		});
+	});
+});
+
+describe('Child elements test', function childElements()
+{
+	it('Should outut children', function test()
+	{
+		var page = {html: { body: {}}};
+		assert.equal(
+			node2html.sync(page),
+			'<!DOCTYPE html><html><body></body></html>'
+		);
+	});
+});
