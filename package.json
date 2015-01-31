@@ -1,0 +1,68 @@
+{
+	"name": "node2html",
+	"version": "0.1.0",
+	"description": "Library for generating html from json.",
+
+	"keywords":
+	[
+		"html"
+	],
+	"homepage": "https://github.com/maximsmol/html",
+	"bugs":
+	{
+		"url": "https://github.com/maximsmol/html/issues",
+		"email": "maximsmol@gmail.com"
+	},
+	"license": "MIT",
+
+	"author":
+	{
+		"name": "Maxim Smolin",
+		"email": "maximsmol@gmail.com",
+		"url": ""
+	},
+	"contributors":
+	{
+		"name": "Maxim Smolin",
+		"email": "maximsmol@gmail.com",
+		"url": ""
+	},
+
+	"main": "./lib/node2html.js",
+
+	"directories":
+	{
+		"lib": "./lib/",
+		"doc": "./doc/",
+		"example": "./example/"
+	},
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/maximsmol/html.git"
+	},
+
+	"scripts":
+	{
+		"test": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha -r blanket -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
+	},
+	"config":
+	{
+		"blanket":
+		{
+			"pattern": "lib",
+			"data-cover-never": "node_modules"
+		}
+	},
+
+	"devDependencies":
+	{
+		"blanket": "~1.1.6",
+		"mocha": "~2.1.0",
+		"mocha-lcov-reporter": "~0.0.1",
+		"coveralls": "~2.11.2"
+	},
+	"engines": {
+		"node": "~0.10.31"
+	}
+}
