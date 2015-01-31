@@ -26,7 +26,7 @@ describe('Testing html tag insertion', function htmlInsertion()
 	{
 		it('Should output tag', function test()
 		{
-			var page = {};
+			var page = [];
 			assert.equal(node2html.sync(page), '<!DOCTYPE html><html></html>');
 		});
 	});
@@ -35,7 +35,7 @@ describe('Testing html tag insertion', function htmlInsertion()
 	{
 		it('Should output tag', function test()
 		{
-			var page = {html: {}};
+			var page = ['html', []];
 			assert.equal(node2html.sync(page), '<!DOCTYPE html><html></html>');
 		});
 	});
@@ -47,7 +47,7 @@ describe('Testing DOCTYPE insertion', function doctypeInsertion()
 	{
 		it('Should output DOCTYPE', function test()
 		{
-			var page = {html: {}};
+			var page = ['html', []];
 			assert.equal(node2html.sync(page), '<!DOCTYPE html><html></html>');
 		});
 	});
@@ -56,7 +56,7 @@ describe('Testing DOCTYPE insertion', function doctypeInsertion()
 	{
 		it('Should output DOCTYPE', function test()
 		{
-			var page = {html: { $DOCTYPE: 'xhtml' }};
+			var page = ['html', ['$DOCTYPE', 'xhtml' ]];
 			assert.equal(node2html.sync(page), '<!DOCTYPE xhtml><html></html>');
 		});
 	});
@@ -66,7 +66,7 @@ describe('Testing element being text', function eltext()
 {
 	it('Should output text as element contents', function test()
 	{
-		var page = {html: 'test'};
+		var page = ['html', 'test'];
 		assert.equal(node2html.sync(page), '<!DOCTYPE html><html>test</html>');
 	});
 });
@@ -79,7 +79,7 @@ describe('Testing attributes', function attr()
 		{
 			it('Should append text', function test()
 			{
-				var page = {html: {$: 'test'}};
+				var page = ['html', ['$', 'test']];
 				assert.equal(
 					node2html.sync(page),
 					'<!DOCTYPE html><html>test</html>'
@@ -91,7 +91,7 @@ describe('Testing attributes', function attr()
 		{
 			it('Should set attributes', function test()
 			{
-				var page = {html: {$: {$hello: 'world'}}};
+				var page = ['html', ['$hello', 'world']];
 				assert.equal(
 					node2html.sync(page),
 					'<!DOCTYPE html><html hello=\'world\'></html>'
@@ -103,22 +103,10 @@ describe('Testing attributes', function attr()
 		{
 			it('Should set attributes', function test()
 			{
-				var page = {html: {$: {$hello: true}}};
+				var page = ['html', ['$hello', true]];
 				assert.equal(
 					node2html.sync(page),
 					'<!DOCTYPE html><html hello></html>'
-				);
-			});
-		});
-
-		describe('Setting text through $.text', function attrText()
-		{
-			it('Should append text', function test()
-			{
-				var page = {html: {$: {text: 'test'}}};
-				assert.equal(
-					node2html.sync(page),
-					'<!DOCTYPE html><html>test</html>'
 				);
 			});
 		});
@@ -128,7 +116,7 @@ describe('Testing attributes', function attr()
 	{
 		it('Should not output attributes', function test()
 		{
-			var page = {html: {}};
+			var page = ['html', []];
 			assert.equal(
 				node2html.sync(page),
 				'<!DOCTYPE html><html></html>'
@@ -143,7 +131,7 @@ describe('Selector parsing test', function selectors()
 	{
 		it('Should output classes', function test()
 		{
-			var page = {'html.test.new': {}};
+			var page = ['html.test.new', []];
 			assert.equal(
 				node2html.sync(page),
 				'<!DOCTYPE html><html class=\'test new\'></html>'
@@ -155,7 +143,7 @@ describe('Selector parsing test', function selectors()
 	{
 		it('Should not output classes', function test()
 		{
-			var page = {'html': {}};
+			var page = ['html', []];
 			assert.equal(
 				node2html.sync(page),
 				'<!DOCTYPE html><html></html>'
@@ -167,7 +155,7 @@ describe('Selector parsing test', function selectors()
 	{
 		it('Should output classes', function test()
 		{
-			var page = {'html#test': {}};
+			var page = ['html#test', []];
 			assert.equal(
 				node2html.sync(page),
 				'<!DOCTYPE html><html id=\'test\'></html>'
@@ -179,7 +167,7 @@ describe('Selector parsing test', function selectors()
 	{
 		it('Should not output classes', function test()
 		{
-			var page = {'html': {}};
+			var page = ['html', []];
 			assert.equal(
 				node2html.sync(page),
 				'<!DOCTYPE html><html></html>'
@@ -192,7 +180,7 @@ describe('Child elements test', function childElements()
 {
 	it('Should outut children', function test()
 	{
-		var page = {html: { body: {}}};
+		var page = ['html', ['body', []]];
 		assert.equal(
 			node2html.sync(page),
 			'<!DOCTYPE html><html><body></body></html>'
@@ -204,22 +192,22 @@ describe('Testing forbidden close tags', function closeTags()
 {
 	it('Should not close tags', function test()
 	{
-		var page = {html:
-			{
-				img:{},
-				input:{},
-				br:{},
-				hr:{},
-				frame:{},
-				area:{},
-				base:{},
-				basefont:{},
-				col:{},
-				isindex:{},
-				link:{},
-				meta:{},
-				param:{}
-			}};
+		var page = ['html',
+			[
+				'img',   [],
+				'input', [],
+				'br',    [],
+				'hr',    [],
+				'frame', [],
+				'area',  [],
+				'base',  [],
+				'basefont', [],
+				'col',   [],
+				'isindex',  [],
+				'link',  [],
+				'meta',  [],
+				'param', []
+			]];
 		assert.equal(
 			node2html.sync(page),
 			'<!DOCTYPE html><html><img><input><br><hr><frame><area><base>'+
