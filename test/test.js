@@ -143,10 +143,10 @@ describe('Selector parsing test', function selectors()
 	{
 		it('Should output classes', function test()
 		{
-			var page = {'html.test': {}};
+			var page = {'html.test.new': {}};
 			assert.equal(
 				node2html.sync(page),
-				'<!DOCTYPE html><html class=\'test\'></html>'
+				'<!DOCTYPE html><html class=\'test new\'></html>'
 			);
 		});
 	});
