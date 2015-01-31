@@ -199,3 +199,31 @@ describe('Child elements test', function childElements()
 		);
 	});
 });
+
+describe('Testing forbidden close tags', function closeTags()
+{
+	it('Should not close tags', function test()
+	{
+		var page = {html:
+			{
+				img:{},
+				input:{},
+				br:{},
+				hr:{},
+				frame:{},
+				area:{},
+				base:{},
+				basefont:{},
+				col:{},
+				isindex:{},
+				link:{},
+				meta:{},
+				param:{}
+			}};
+		assert.equal(
+			node2html.sync(page),
+			'<!DOCTYPE html><html><img><input><br><hr><frame><area><base>'+
+			'<basefont><col><isindex><link><meta><param></html>'
+		);
+	});
+});
