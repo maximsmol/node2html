@@ -9,6 +9,7 @@ var body =
 	'div#a',
 	[
 		'span.red', 'Welcome to test',
+		'$', ' ',
 		'a', [ '$', 'Go To Div', '$href', '#a' ]
 	]
 ];
