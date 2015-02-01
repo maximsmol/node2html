@@ -7,10 +7,10 @@
 	[
 		"html"
 	],
-	"homepage": "https://github.com/maximsmol/html",
+	"homepage": "https://github.com/maximsmol/node2html",
 	"bugs":
 	{
-		"url": "https://github.com/maximsmol/html/issues",
+		"url": "https://github.com/maximsmol/node2html/issues",
 		"email": "maximsmol@gmail.com"
 	},
 	"license": "MIT",
@@ -39,7 +39,7 @@
 	"repository":
 	{
 		"type": "git",
-		"url": "https://github.com/maximsmol/html.git"
+		"url": "https://github.com/maximsmol/node2html.git"
 	},
 
 	"scripts":
