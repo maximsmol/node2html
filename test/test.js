@@ -215,3 +215,26 @@ describe('Testing forbidden close tags', function closeTags()
 		);
 	});
 });
+
+describe('Testing unpacking', function unpacking()
+{
+	it('Should unpack', function test()
+	{
+		var page =
+		[
+			'html',
+			[
+				'$$',
+				[
+					'span', 'test',
+					'span', 'test1'
+				]
+			]
+		];
+
+		assert.equal(
+			node2html.sync(page),
+			'<!DOCTYPE html><html><span>test</span><span>test1</span></html>'
+		);
+	});
+});
