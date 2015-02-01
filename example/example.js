@@ -9,7 +9,7 @@ var body =
 	'div#a',
 	[
 		'span.red', 'Welcome to test',
-		'a', [ '$text', 'Go To Div', '$href', '#a' ]
+		'a', [ '$', 'Go To Div', '$href', '#a' ]
 	]
 ];
 
