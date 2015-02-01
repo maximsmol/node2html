@@ -1,18 +1,18 @@
 [![Coverage Status](https://coveralls.io/repos/maximsmol/node2html/badge.svg?branch=master)](https://coveralls.io/r/maximsmol/node2html?branch=master) [![Build Status](https://travis-ci.org/maximsmol/node2html.svg?branch=master)](https://travis-ci.org/maximsmol/node2html)
 
-# node2htm
+# node2html
 A library for generating html from js objects.
 
 ## Features:
 
-1. Removes insignificant space characters
+1. No *insignificant* whitespace characters
 	As all formatting is collapsed, but text literals are untouched
 
 1. Works as a template engine
 	As you have a full programming language in your disposal
 
 1. Infinite expandability
-	As this library knows *nothing* about html (except which tags should never be closed)
+	As this library knows *nothing* about what it generates
 
 
 ## Example
@@ -49,46 +49,70 @@ Becomes the following html markup:
 
 
 ### Syntax
-We use array-based AST nodes:
+node2html uses array-based AST nodes:
 ```js
 [
 	selector,
-	value
+	value,
+
+	...
 ]
 ```
 
 
-`selector` contains basic info about the tag:
+#### `selector`
+Contains the tagname, id and classname:
 ```js
 'tagName#tagId.class.class1.class2'
 ```
 
 
-`value` contains tag's attributes and content.
+#### `value`
+Contains tag's content and attributes.
 It is one of the following:
 
 * A string (if tag only contains text) `['span', 'hello']`
-* An array, that contains tag's attributes and content `['span', [...]]`
+* An array, containing tag's content and attributes`['span', [...]]`
 
-To set tag's attributes, prefix them with a $:
+#### Setting attributes
+Attributes are set using a `$` prefix:
 ```js
+[
+	'span',
 	[
-		'span',
-		[
-			'$rel', 'label'
-		]
+		'$rel', 'label'
 	]
+]
 ```
 
-To set tag's attributes *and* set text content, use the `$` symbol:
+#### Text literals
+You can add text literals to markup, using `$`:
 ```js
+[
+	'span',
 	[
-		'span',
-		[
-			'$rel', 'label',
-			'span.icon-home', [],
-			'$', 'Go home',
-			'span.icon-go', []
-		]
+		'span.icon-home', [],
+		'$', 'Go home',
+		'span.icon-go', []
 	]
+]
+```
+
+#### Unpacking
+You can "unpack" tags from an array using `$$`:
+```js
+var getSpanContent = function gsc()
+{
+	return [
+				'span.icon-home', ['$', 'home'],
+				'span.icon-go', ['$', 'go']
+			];
+};
+
+[
+	'span',
+	[
+		'$$', getSpanContent()
+	]
+]
 ```
