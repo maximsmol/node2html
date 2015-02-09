@@ -1,4 +1,5 @@
-[![Coverage Status](https://coveralls.io/repos/maximsmol/node2html/badge.svg?branch=master)](https://coveralls.io/r/maximsmol/node2html?branch=master) [![Build Status](https://travis-ci.org/maximsmol/node2html.svg?branch=master)](https://travis-ci.org/maximsmol/node2html)
+[![Build Status](https://img.shields.io/travis/maximsmol/node2html.svg)](https://travis-ci.org/maximsmol/node2html) [![Coverage Status](https://img.shields.io/coveralls/maximsmol/node2html.svg)](https://coveralls.io/r/maximsmol/node2html?branch=master) [![Issues Count](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/maximsmol/node2html/)
+[![Dependencies Status](https://img.shields.io/requires/github/maximsmol/node2html.svg)](https://www.npmjs.com/package/node2html) [![Downloads Count](https://img.shields.io/npm/dm/node2html.svg)](https://www.npmjs.com/package/node2html) [![NPM License Status](https://img.shields.io/npm/l/node2html.svg)](https://www.npmjs.com/package/node2html)
 
 # node2html
 A library for generating html from js objects.
