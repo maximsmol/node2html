@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var node2html = require('../lib/node2html');
 
 
@@ -43,4 +44,5 @@ var page =
 	'body', body
 ];
 
-console.log(node2html.sync(page));
+fs.writeFileSync('./example/example.html', node2html.sync(page));
+console.log('Generated example.html');

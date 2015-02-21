@@ -1,5 +1,11 @@
-# v1.1.1
+# v1.2.2
+1. Fixed unnecessary spaces being added between attributes
+
+# v1.2.1
 1. Fixed selectors with hyphens not being parsed correctly
+
+# v1.2.0
+1. Added unpacking
 
 # v1.1.0
 1. Now using array-based ast
