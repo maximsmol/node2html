@@ -125,6 +125,96 @@ describe('Testing attributes', function attr()
 	});
 });
 
+describe('Testing spaces between attributes', function attrSpaces()
+{
+	describe('Only id', function onlyId()
+	{
+		it('Should insert one space', function test()
+		{
+			var page =
+			[
+				'html#a', ''
+			];
+			assert.equal(
+				node2html.sync(page),
+				'<!DOCTYPE html><html id=\'a\'></html>'
+			);
+		});
+	});
+	describe('Only class', function onlyId()
+	{
+		it('Should insert one space', function test()
+		{
+			var page =
+			[
+				'html.a', ''
+			];
+			assert.equal(
+				node2html.sync(page),
+				'<!DOCTYPE html><html class=\'a\'></html>'
+			);
+		});
+	});
+	it('Id and class', function test()
+	{
+		var page =
+		[
+			'html#a.a', ''
+		];
+		assert.equal(
+			node2html.sync(page),
+			'<!DOCTYPE html><html id=\'a\'class=\'a\'></html>'
+		);
+	});
+	it('Only text attributes', function test()
+	{
+		var page =
+		[
+			'html',
+			[
+				'$a', 'a',
+				'$b', 'b'
+			]
+		];
+		assert.equal(
+			node2html.sync(page),
+			'<!DOCTYPE html><html a=\'a\'b=\'b\'></html>'
+		);
+	});
+	it('Text and boolean attributes', function test()
+	{
+		var page =
+		[
+			'html',
+			[
+				'$a', 'a',
+				'$b', true,
+				'$c', 'c'
+			]
+		];
+		assert.equal(
+			node2html.sync(page),
+			'<!DOCTYPE html><html a=\'a\'b c=\'c\'></html>'
+		);
+	});
+	it('All together', function test()
+	{
+		var page =
+		[
+			'html#a.a',
+			[
+				'$b', true,
+				'$a', 'a',
+				'$c', 'c'
+			]
+		];
+		assert.equal(
+			node2html.sync(page),
+			'<!DOCTYPE html><html id=\'a\'class=\'a\'b a=\'a\'c=\'c\'></html>'
+		);
+	});
+});
+
 describe('Selector parsing test', function selectors()
 {
 	describe('Inserting classes', function classes()
