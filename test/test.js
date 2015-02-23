@@ -328,3 +328,33 @@ describe('Testing unpacking', function unpacking()
 		);
 	});
 });
+
+describe('Testing Node2HtmlStream', function stream()
+{
+	it('Should work', function test(done)
+	{
+		var page =
+		[
+			'html#a.a',
+			[
+				'$b', true,
+				'$a', 'a',
+				'$c', 'c',
+				'div', 'test'
+			]
+		];
+		var correct = '<!DOCTYPE html><html id=\'a\'';
+		correct += 'class=\'a\'b a=\'a\'c=\'c\'><div>test</div></html>';
+
+		var stream = new node2html.Node2HtmlStream(page);
+		stream.on('data', function check(chunk)
+		{
+			assert.strictEqual(chunk, correct);
+		});
+
+		stream.on('end', function end()
+		{
+			done();
+		});
+	});
+});

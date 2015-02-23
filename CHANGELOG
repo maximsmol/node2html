@@ -1,3 +1,6 @@
+# v1.3.0
+1. Added a *blocking* stream
+
 # v1.2.2
 1. Fixed unnecessary spaces being added between attributes
 

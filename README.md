@@ -2,118 +2,121 @@
 [![Dependencies Status](https://img.shields.io/requires/github/maximsmol/node2html.svg)](https://www.npmjs.com/package/node2html) [![Downloads Count](https://img.shields.io/npm/dm/node2html.svg)](https://www.npmjs.com/package/node2html) [![NPM License Status](https://img.shields.io/npm/l/node2html.svg)](https://www.npmjs.com/package/node2html)
 
 # node2html
-A library for generating html from js objects.
+A library for generating HTML from js objects.
 
 ## Features:
 
 1. No *insignificant* whitespace characters
-	As all formatting is collapsed, but text literals are untouched
+    As all formatting collapses, but text literals are untouched
 
 1. Works as a template engine
-	As you have a full programming language in your disposal
+    As you have a full programming language at your disposal
 
 1. Infinite expandability
-	As this library knows *nothing* about what it generates
+    As this library knows *nothing* about what it generates
 
 
 ## Example
 This javascript object:
 ```js
 [
-	'html',
-	[
-		'$DOCTYPE', 'a-html',
-		'head',
-		[
-			'title', 'HELLO'
-		],
-		'body',
-		[
-			'span', 'hello'
-		]
-	]
+    'html',
+    [
+        '$DOCTYPE', 'a-html',
+        'head',
+        [
+            'title', 'HELLO'
+        ],
+        'body',
+        [
+            'span', 'hello'
+        ]
+    ]
 ]
 ```
 
-Becomes the following html markup:
+Becomes the following HTML markup:
 ```html
 <!DOCTYPE a-html>
 <html>
-	<head>
-		<title>HELLO</title>
-	</head>
-	<body>
-		<span>hello</span>
-	</body>
+    <head>
+        <title>HELLO</title>
+    </head>
+    <body>
+        <span>hello</span>
+    </body>
 </html>
 ```
 
 
-### Syntax
+## Syntax
 node2html uses array-based AST nodes:
 ```js
 [
-	selector,
-	value,
+    selector,
+    value,
 
-	...
+    ...
 ]
 ```
 
 
-#### `selector`
-Contains the tagname, id and classname:
+### `selector`
+Contains the tagname, id and the classname:
 ```js
 'tagName#tagId.class.class1.class2'
 ```
 
 
-#### `value`
+### `value`
 Contains tag's content and attributes.
 It is one of the following:
 
 * A string (if tag only contains text) `['span', 'hello']`
 * An array, containing tag's content and attributes`['span', [...]]`
 
-#### Setting attributes
+### Setting attributes
 Attributes are set using a `$` prefix:
 ```js
 [
-	'span',
-	[
-		'$rel', 'label'
-	]
+    'span',
+    [
+        '$rel', 'label'
+    ]
 ]
 ```
 
-#### Text literals
+### Text literals
 You can add text literals to markup, using `$`:
 ```js
 [
-	'span',
-	[
-		'span.icon-home', [],
-		'$', 'Go home',
-		'span.icon-go', []
-	]
+    'span',
+    [
+        'span.icon-home', [],
+        '$', 'Go home',
+        'span.icon-go', []
+    ]
 ]
 ```
 
-#### Unpacking
+### Unpacking
 You can "unpack" tags from an array using `$$`:
 ```js
 var getSpanContent = function gsc()
 {
-	return [
-				'span.icon-home', ['$', 'home'],
-				'span.icon-go', ['$', 'go']
-			];
+    return [
+                'span.icon-home', ['$', 'home'],
+                'span.icon-go', ['$', 'go']
+            ];
 };
 
 [
-	'span',
-	[
-		'$$', getSpanContent()
-	]
+    'span',
+    [
+        '$$', getSpanContent()
+    ]
 ]
 ```
+
+## Stream support
+node2html also provides a *blocking* stream wraparound, for use with gulp etc.
