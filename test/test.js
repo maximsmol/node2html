@@ -27,7 +27,7 @@ describe('Testing html tag insertion', function htmlInsertion()
 		it('Should output tag', function test()
 		{
 			var page = [];
-			assert.equal(node2html.sync(page), '<!DOCTYPE html><html></html>');
+			assert.strictEqual(node2html.sync(page), '<!doctype html><html></html>');
 		});
 	});
 
@@ -36,28 +36,28 @@ describe('Testing html tag insertion', function htmlInsertion()
 		it('Should output tag', function test()
 		{
 			var page = ['html', []];
-			assert.equal(node2html.sync(page), '<!DOCTYPE html><html></html>');
+			assert.strictEqual(node2html.sync(page), '<!doctype html><html></html>');
 		});
 	});
 });
 
-describe('Testing DOCTYPE insertion', function doctypeInsertion()
+describe('Testing doctype insertion', function doctypeInsertion()
 {
-	describe('Omiting DOCTYPE', function omiting()
+	describe('Omiting doctype', function omiting()
 	{
-		it('Should output DOCTYPE', function test()
+		it('Should output doctype', function test()
 		{
 			var page = ['html', []];
-			assert.equal(node2html.sync(page), '<!DOCTYPE html><html></html>');
+			assert.strictEqual(node2html.sync(page), '<!doctype html><html></html>');
 		});
 	});
 
-	describe('Not omiting DOCTYPE', function notOmiting()
+	describe('Not omiting doctype', function notOmiting()
 	{
-		it('Should output DOCTYPE', function test()
+		it('Should output doctype', function test()
 		{
-			var page = ['html', ['$DOCTYPE', 'xhtml' ]];
-			assert.equal(node2html.sync(page), '<!DOCTYPE xhtml><html></html>');
+			var page = ['html', ['$doctype', 'xhtml' ]];
+			assert.strictEqual(node2html.sync(page), '<!doctype xhtml><html></html>');
 		});
 	});
 });
@@ -67,7 +67,7 @@ describe('Testing element being text', function eltext()
 	it('Should output text as element contents', function test()
 	{
 		var page = ['html', 'test'];
-		assert.equal(node2html.sync(page), '<!DOCTYPE html><html>test</html>');
+		assert.strictEqual(node2html.sync(page), '<!doctype html><html>test</html>');
 	});
 });
 
@@ -80,9 +80,9 @@ describe('Testing attributes', function attr()
 			it('Should append text', function test()
 			{
 				var page = ['html', ['$', 'test']];
-				assert.equal(
+				assert.strictEqual(
 					node2html.sync(page),
-					'<!DOCTYPE html><html>test</html>'
+					'<!doctype html><html>test</html>'
 				);
 			});
 		});
@@ -92,9 +92,9 @@ describe('Testing attributes', function attr()
 			it('Should set attributes', function test()
 			{
 				var page = ['html', ['$hello', 'world']];
-				assert.equal(
+				assert.strictEqual(
 					node2html.sync(page),
-					'<!DOCTYPE html><html hello=\'world\'></html>'
+					'<!doctype html><html hello=\'world\'></html>'
 				);
 			});
 		});
@@ -104,9 +104,9 @@ describe('Testing attributes', function attr()
 			it('Should set attributes', function test()
 			{
 				var page = ['html', ['$hello', true]];
-				assert.equal(
+				assert.strictEqual(
 					node2html.sync(page),
-					'<!DOCTYPE html><html hello></html>'
+					'<!doctype html><html hello></html>'
 				);
 			});
 		});
@@ -117,9 +117,9 @@ describe('Testing attributes', function attr()
 		it('Should not output attributes', function test()
 		{
 			var page = ['html', []];
-			assert.equal(
+			assert.strictEqual(
 				node2html.sync(page),
-				'<!DOCTYPE html><html></html>'
+				'<!doctype html><html></html>'
 			);
 		});
 	});
@@ -135,9 +135,9 @@ describe('Testing spaces between attributes', function attrSpaces()
 			[
 				'html#a', ''
 			];
-			assert.equal(
+			assert.strictEqual(
 				node2html.sync(page),
-				'<!DOCTYPE html><html id=\'a\'></html>'
+				'<!doctype html><html id=\'a\'></html>'
 			);
 		});
 	});
@@ -149,9 +149,9 @@ describe('Testing spaces between attributes', function attrSpaces()
 			[
 				'html.a', ''
 			];
-			assert.equal(
+			assert.strictEqual(
 				node2html.sync(page),
-				'<!DOCTYPE html><html class=\'a\'></html>'
+				'<!doctype html><html class=\'a\'></html>'
 			);
 		});
 	});
@@ -161,9 +161,9 @@ describe('Testing spaces between attributes', function attrSpaces()
 		[
 			'html#a.a', ''
 		];
-		assert.equal(
+		assert.strictEqual(
 			node2html.sync(page),
-			'<!DOCTYPE html><html id=\'a\'class=\'a\'></html>'
+			'<!doctype html><html id=\'a\'class=\'a\'></html>'
 		);
 	});
 	it('Only text attributes', function test()
@@ -176,9 +176,9 @@ describe('Testing spaces between attributes', function attrSpaces()
 				'$b', 'b'
 			]
 		];
-		assert.equal(
+		assert.strictEqual(
 			node2html.sync(page),
-			'<!DOCTYPE html><html a=\'a\'b=\'b\'></html>'
+			'<!doctype html><html a=\'a\'b=\'b\'></html>'
 		);
 	});
 	it('Text and boolean attributes', function test()
@@ -192,9 +192,9 @@ describe('Testing spaces between attributes', function attrSpaces()
 				'$c', 'c'
 			]
 		];
-		assert.equal(
+		assert.strictEqual(
 			node2html.sync(page),
-			'<!DOCTYPE html><html a=\'a\'b c=\'c\'></html>'
+			'<!doctype html><html a=\'a\'b c=\'c\'></html>'
 		);
 	});
 	it('All together', function test()
@@ -208,9 +208,9 @@ describe('Testing spaces between attributes', function attrSpaces()
 				'$c', 'c'
 			]
 		];
-		assert.equal(
+		assert.strictEqual(
 			node2html.sync(page),
-			'<!DOCTYPE html><html id=\'a\'class=\'a\'b a=\'a\'c=\'c\'></html>'
+			'<!doctype html><html id=\'a\'class=\'a\'b a=\'a\'c=\'c\'></html>'
 		);
 	});
 });
@@ -222,9 +222,9 @@ describe('Selector parsing test', function selectors()
 		it('Should output classes', function test()
 		{
 			var page = ['html.test.new', []];
-			assert.equal(
+			assert.strictEqual(
 				node2html.sync(page),
-				'<!DOCTYPE html><html class=\'test new\'></html>'
+				'<!doctype html><html class=\'test new\'></html>'
 			);
 		});
 	});
@@ -234,9 +234,9 @@ describe('Selector parsing test', function selectors()
 		it('Should not output classes', function test()
 		{
 			var page = ['html', []];
-			assert.equal(
+			assert.strictEqual(
 				node2html.sync(page),
-				'<!DOCTYPE html><html></html>'
+				'<!doctype html><html></html>'
 			);
 		});
 	});
@@ -246,9 +246,9 @@ describe('Selector parsing test', function selectors()
 		it('Should output classes', function test()
 		{
 			var page = ['html#test', []];
-			assert.equal(
+			assert.strictEqual(
 				node2html.sync(page),
-				'<!DOCTYPE html><html id=\'test\'></html>'
+				'<!doctype html><html id=\'test\'></html>'
 			);
 		});
 	});
@@ -258,9 +258,9 @@ describe('Selector parsing test', function selectors()
 		it('Should not output classes', function test()
 		{
 			var page = ['html', []];
-			assert.equal(
+			assert.strictEqual(
 				node2html.sync(page),
-				'<!DOCTYPE html><html></html>'
+				'<!doctype html><html></html>'
 			);
 		});
 	});
@@ -271,9 +271,9 @@ describe('Child elements test', function childElements()
 	it('Should outut children', function test()
 	{
 		var page = ['html', ['body', []]];
-		assert.equal(
+		assert.strictEqual(
 			node2html.sync(page),
-			'<!DOCTYPE html><html><body></body></html>'
+			'<!doctype html><html><body></body></html>'
 		);
 	});
 });
@@ -298,9 +298,9 @@ describe('Testing forbidden close tags', function closeTags()
 				'meta',  [],
 				'param', []
 			]];
-		assert.equal(
+		assert.strictEqual(
 			node2html.sync(page),
-			'<!DOCTYPE html><html><img><input><br><hr><frame><area><base>'+
+			'<!doctype html><html><img><input><br><hr><frame><area><base>'+
 			'<basefont><col><isindex><link><meta><param></html>'
 		);
 	});
@@ -322,9 +322,9 @@ describe('Testing unpacking', function unpacking()
 			]
 		];
 
-		assert.equal(
+		assert.strictEqual(
 			node2html.sync(page),
-			'<!DOCTYPE html><html><span>test</span><span>test1</span></html>'
+			'<!doctype html><html><span>test</span><span>test1</span></html>'
 		);
 	});
 });
@@ -343,7 +343,7 @@ describe('Testing Node2HtmlStream', function stream()
 				'div', 'test'
 			]
 		];
-		var correct = '<!DOCTYPE html><html id=\'a\'';
+		var correct = '<!doctype html><html id=\'a\'';
 		correct += 'class=\'a\'b a=\'a\'c=\'c\'><div>test</div></html>';
 
 		var stream = new node2html.Node2HtmlStream(page);
