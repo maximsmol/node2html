@@ -1,3 +1,7 @@
+# v1.4.1
+1. Fixed stream not handling .read(size) calls the right way
+1. Improved tests
+
 # v1.4.0
 1. Now using lowercase <!doctype  >
 
