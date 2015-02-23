@@ -331,30 +331,61 @@ describe('Testing unpacking', function unpacking()
 
 describe('Testing Node2HtmlStream', function stream()
 {
-	it('Should work', function test(done)
+	describe('Using on(\'data\', ...)', function ondata()
 	{
-		var page =
-		[
-			'html#a.a',
+		it('Should work', function test(done)
+		{
+			var page =
 			[
-				'$b', true,
-				'$a', 'a',
-				'$c', 'c',
-				'div', 'test'
-			]
-		];
-		var correct = '<!doctype html><html id=\'a\'';
-		correct += 'class=\'a\'b a=\'a\'c=\'c\'><div>test</div></html>';
+				'html#a.a',
+				[
+					'$b', true,
+					'$a', 'a',
+					'$c', 'c',
+					'div', 'test'
+				]
+			];
+			var correct = '<!doctype html><html id=\'a\'';
+			correct += 'class=\'a\'b a=\'a\'c=\'c\'><div>test</div></html>';
 
-		var stream = new node2html.Node2HtmlStream(page);
-		stream.on('data', function check(chunk)
-		{
-			assert.strictEqual(chunk, correct);
+			var stream = new node2html.Node2HtmlStream(page);
+			stream.on('data', function check(chunk)
+			{
+				assert.strictEqual(chunk.toString(), correct);
+			});
+
+			stream.on('end', function end()
+			{
+				done();
+			});
 		});
+	});
 
-		stream.on('end', function end()
+	describe('Using .read()', function read()
+	{
+		it('Should work', function test(done)
 		{
-			done();
+			var page =
+			[
+				'html#a.a',
+				[
+					'$b', true,
+					'$a', 'a',
+					'$c', 'c',
+					'div', 'test'
+				]
+			];
+			var correct = '<!doctype html><html id=\'a\'';
+			correct += 'class=\'a\'b a=\'a\'c=\'c\'><div>test</div></html>';
+
+			var stream = new node2html.Node2HtmlStream(page);
+			assert.strictEqual(stream.read(1).toString(), correct[0]);
+			assert.strictEqual(stream.read().toString(), correct.substr(1));
+
+			stream.on('end', function end()
+			{
+				done();
+			});
 		});
 	});
 });
