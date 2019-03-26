@@ -2,61 +2,45 @@
 	"name": "node2html",
 	"version": "1.4.1",
 	"description": "Library for generating html from js objects.",
-
-	"keywords":
-	[
+	"keywords": [
 		"html"
 	],
 	"homepage": "https://github.com/maximsmol/node2html",
-	"bugs":
-	{
+	"bugs": {
 		"url": "https://github.com/maximsmol/node2html/issues",
 		"email": "maximsmol@gmail.com"
 	},
 	"license": "MIT",
-
-	"author":
-	{
+	"author": {
 		"name": "Maxim Smolin",
 		"email": "maximsmol@gmail.com",
 		"url": ""
 	},
-	"contributors":
-	{
+	"contributors": {
 		"name": "Maxim Smolin",
 		"email": "maximsmol@gmail.com",
 		"url": ""
 	},
-
 	"main": "./lib/node2html.js",
-
-	"directories":
-	{
+	"directories": {
 		"lib": "./lib/",
 		"doc": "./doc/",
 		"example": "./example/"
 	},
-	"repository":
-	{
+	"repository": {
 		"type": "git",
 		"url": "https://github.com/maximsmol/node2html.git"
 	},
-
-	"scripts":
-	{
+	"scripts": {
 		"test": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 ./node_modules/.bin/mocha -r blanket -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
 	},
-	"config":
-	{
-		"blanket":
-		{
+	"config": {
+		"blanket": {
 			"pattern": "lib",
 			"data-cover-never": "node_modules"
 		}
 	},
-
-	"devDependencies":
-	{
+	"devDependencies": {
 		"blanket": "~1.1.6",
 		"mocha": "~2.1.0",
 		"mocha-lcov-reporter": "~0.0.1",
