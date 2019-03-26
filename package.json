@@ -1,6 +1,6 @@
 {
 	"name": "node2html",
-	"version": "1.4.1",
+	"version": "2.0.0",
 	"description": "Library for generating html from js objects.",
 	"keywords": [
 		"html"
@@ -16,11 +16,13 @@
 		"email": "maximsmol@gmail.com",
 		"url": ""
 	},
-	"contributors": {
-		"name": "Maxim Smolin",
-		"email": "maximsmol@gmail.com",
-		"url": ""
-	},
+	"contributors": [
+		{
+			"name": "Alex Blackham",
+			"email": "ablackham2000@gmail.com",
+			"url": "https://github.com/b3none"
+		}
+	],
 	"main": "./lib/node2html.js",
 	"directories": {
 		"lib": "./lib/",
